@@ -1,7 +1,83 @@
-[gd_scene load_steps=3 format=3 uid="uid://dnnwb0be5sogp"]
+[gd_scene load_steps=7 format=3 uid="uid://dnnwb0be5sogp"]
 
-[ext_resource type="Script" path="res://player/player.gd" id="1_n3asd"]
+[ext_resource type="Script" path="res://player/scripts/player.gd" id="1_n3asd"]
+[ext_resource type="Texture2D" uid="uid://dshdyihps31tu" path="res://player/graphics/player-moving-sprite-sheet.png" id="2_6s1lp"]
 [ext_resource type="Texture2D" uid="uid://dotpwxtnlig5o" path="res://player/graphics/player-idle.png" id="2_pghm8"]
+
+[sub_resource type="Animation" id="Animation_sgmik"]
+resource_name = "idle"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("2_pghm8")]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:hframes")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [1]
+}
+
+[sub_resource type="Animation" id="Animation_10iwm"]
+resource_name = "moving"
+length = 0.266673
+loop_mode = 1
+step = 0.0666667
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("2_6s1lp")]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:hframes")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [4]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sprite2D:frame")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.0666667, 0.133333, 0.2),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_sp7j7"]
+_data = {
+"idle": SubResource("Animation_sgmik"),
+"moving": SubResource("Animation_10iwm")
+}
 
 [node name="Player" type="CharacterBody2D"]
 script = ExtResource("1_n3asd")
@@ -10,3 +86,9 @@ script = ExtResource("1_n3asd")
 texture_filter = 3
 scale = Vector2(4, 4)
 texture = ExtResource("2_pghm8")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_sp7j7")
+}
+autoplay = "idle"
