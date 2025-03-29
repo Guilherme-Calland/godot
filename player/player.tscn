@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://dnnwb0be5sogp"]
+[gd_scene load_steps=8 format=3 uid="uid://dnnwb0be5sogp"]
 
 [ext_resource type="Script" path="res://player/scripts/player.gd" id="1_n3asd"]
 [ext_resource type="Texture2D" uid="uid://dshdyihps31tu" path="res://player/graphics/player-moving-sprite-sheet.png" id="2_6s1lp"]
@@ -79,6 +79,9 @@ _data = {
 "moving": SubResource("Animation_10iwm")
 }
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_qxygm"]
+size = Vector2(20, 32)
+
 [node name="Player" type="CharacterBody2D"]
 script = ExtResource("1_n3asd")
 
@@ -92,3 +95,8 @@ libraries = {
 "": SubResource("AnimationLibrary_sp7j7")
 }
 autoplay = "idle"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
+position = Vector2(-2, 2)
+shape = SubResource("RectangleShape2D_qxygm")

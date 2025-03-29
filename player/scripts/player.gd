@@ -1,6 +1,7 @@
 extends CharacterBody2D
 
 @export var speed = 300
+@export var gravity = 10
 var facing_right := true
 
 func run():
@@ -10,6 +11,7 @@ func run():
 	
 	var moving = direction != 0
 	$AnimationPlayer.play(AnimationConstants.MOVING if moving else AnimationConstants.IDLE)
-
+	
 	velocity.x = direction * speed
+	velocity.y += gravity
 	move_and_slide()
